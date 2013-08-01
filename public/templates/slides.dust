@@ -1,0 +1,9 @@
+<div class="slide-window">
+	<div class="slide-panes">
+		{#slides}
+		  	<div class="slide-pane">
+				<div class="slide">{html|s}</div>
+			</div>
+	 	{/slides}
+	</div>
+</div>

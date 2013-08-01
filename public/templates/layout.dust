@@ -1,0 +1,14 @@
+<div id="window">
+	<div id="panes">
+		<div class="left pane">LEFT</div>
+		<div class="visible pane">
+			<div id="outlet">{outlet|s}</div>
+		</div>
+		<div class="right pane">RIGHT</div>
+	</div>
+</div>
+<div id="store"></div>
+<div id="controls">
+	<div class="right">Asa Kusuma</div>
+	<img src="/images/logo.png" />
+</div>
