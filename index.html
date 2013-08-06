@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Becoming a Control Freak with Controllers and Promises</title>
+    <link href='http://fonts.googleapis.com/css?family=Monda:400,700|PT+Sans+Caption' rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel='stylesheet' href='stylesheets/prettify.css' />
+
+    <script type="text/javascript" src="javascripts/lib/prettify.js"></script>
+    <script type="text/javascript" src="javascripts/lib/q.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/underscore.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/backbone.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/fiber.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/dust-full-1.2.3.min.js"></script>
+    <script type="text/javascript" src="javascripts/lib/require.js"></script>
+    
+    <script type="text/javascript" src="javascripts/templates.js"></script>
+
+    <script>
+
+      //Sync dust version
+      function dustSync(name, data) {
+        var output;
+        dust.render(name, data, function(err, out) {
+          output = out;
+        });
+        return output;
+      }
+
+      var P = {};
+      var APPGLOBALS = {};
+      
+      
+      
+        APPGLOBALS.slides = [{"html":"<h1>About Me</h1>\n<ul>\n<li>Mobile web developer @LinkedIn</li>\n<li>Recent college grad</li>\n<li>Mountain bike in the summer</li>\n<li>Snowboard in the winter</li>\n<li>Write JavaScript year round</li>\n</ul>\n","id":1},{"html":"<div class=\"img-contain\" style=\"background-image:url('images/personal.jpg');\"></div>","id":2},{"html":"<h1>Mobile Web: LinkedIn&#39;s first Backbone App</h1>\n","id":3},{"html":"<h1>Re-skinning a Backbone app:<br> Easy, right?</h1>\n","id":4},{"html":"<p><div class=\"img-fill\" style=\"background-image:url('images/facepalm.jpg');\"></div></p>\n<h1>Not necessarily</h1>\n","id":5},{"html":"<p><div class=\"img-fill\" style=\"background-image:url('images/wildwest.png');\"></div></p>\n<h1 class=\"reverse\">The Wild West</h1>","id":6},{"html":"<div class=\"img-fill\" style=\"background-image:url('images/router.jpg');\"></div>","id":7},{"html":"<div class=\"img-contain\" style=\"background-image:url('images/execution.png');\"></div>","id":8},{"html":"<h2>Not enough abstraction</h2>\n<pre><code>//View code\nvar hasCongrats;\n//other code...\nthis.model.save(null, { success: function() {\n    if(hasCongrats){\n        var keyClass = JobItemView.Cache_Params.KEY_CLASS;\n        var jobModelKey = Cache.generateKey(keyClass, composeToken);\n        var jobModel = Cache.get(jobModelKey);\n    }\n}</code></pre>\n","id":9},{"html":"<p><div class=\"img-fill\" style=\"background-image:url('images/bullriding.jpg');\"></div></p>\n<h2 class=\"reverse\">We&#39;re actively taming our Backbone Wild West</h2>","id":10},{"html":"<h1>We&#39;re optimizing for Mobile</h1>\n","id":11},{"html":"<h1>We have a feeling we aren&#39;t the only ones</h1>\n","id":12},{"html":"<h1>Promises: Simplifying Async Backbone</h1>\n","id":13},{"html":"<h2>Object representing an operation that “promises” a future result</h2>\n","id":14},{"html":"<h1>Abstractions are easier to control</h1>\n","id":15},{"html":"<h1>Reason about <em>async</em> operation in a <em>synchronous</em> manner</h1>\n","id":16},{"html":"<h1>Promise nitty gritty</h1>\n<ul>\n<li>Unified spec: A+</li>\n<li>Implemented by multiple libraries</li>\n<li>myPromise.then(doSomething)</li>\n</ul>\n","id":17},{"html":"<h2>Backbone and jQuery already use promises</h2>\n<pre><code>//jqXHR object\nvar promise = myModel.fetch();\npromise.then(doSomething);\n\n//jqXHR object\nvar promise = $.ajax(&#39;/endpont&#39;);\npromise.then(doSomething);</code></pre>\n","id":18},{"html":"<h2>Why are promises awesome?</h2>\n<pre><code>//You can get with this\ndoSomething(function(result) {\n    thenDoSomething(map(result), function(result) {\n        doStuff(transform(result), function() {\n            //Do something cool\n        });\n    });\n});\n\n//Or you can get with that\ndoSomething.then(thenDoSomething).then(doStuff);</code></pre>\n","id":19},{"html":"<p><div class=\"img-contain\" style=\"background-image:url('images/execution.png');\"></div></p>\n<h1 class=\"highlight\">Let&#39;s fix this</h1>","id":20},{"html":"<h2>Before</h2>\n<pre><code>//1. Do page transition animations\nthis.showPage(&#39;#my-element&#39;, function(){\n    //2. Load data\n    TLI.YourGroupsModel.fetch({\n        &#39;success&#39;: function(groups) {\n            //3. Render data\n            var view = new View({\n                collection: groups\n            });\n        }\n    });\n});</code></pre>\n","id":21},{"html":"<h2>After</h2>\n<pre><code>//1. Do some animations + load data\nMyPromiseLibrary.all([\n    this.showPage(&#39;#gyml&#39;),\n    TLI.YourGroupsModel.fetch()\n]).then(function(showResult, groupsResult) {\n    //2. render data\n    var view = new GymlView({\n        collection: groupsResult\n    });\n});</code></pre>\n","id":22},{"html":"<h1>That last slide?<br> Put that code in a controller</h1>\n","id":23},{"html":"<h1>Putting the &quot;C&quot; back in MVC</h1>\n","id":24},{"html":"<h1>Backbone is a not a framework</h1>\n","id":25},{"html":"<h1>It&#39;s a library for building a framework</h1>\n","id":26},{"html":"<h1>Everything should belong somewhere</h1>\n","id":27},{"html":"<h1>Why the controller?</h1>\n<ul>\n<li>MVC is well known</li>\n<li>Name carries expectations</li>\n<li>Drain your routers</li>\n<li>Reduce points of contact, dependencies</li>\n<li>Page controllers</li>\n</ul>\n","id":28},{"html":"<h2>Controllers are finite</h2>\n<ul>\n<li>They can be paused<ul>\n<li>Hide visual components</li>\n<li>Stop any polling</li>\n</ul>\n</li>\n<li>They can be destroyed<ul>\n<li>Unbind</li>\n<li>Release memory</li>\n</ul>\n</li>\n</ul>\n","id":29},{"html":"<h1>Monogamous components</h1>\n<div class=\"phrase\">Components should strive to interact with one and only one application layer</div>","id":30},{"html":"<div class=\"img-contain\" style=\"background-image:url('images/app-process-1.png');\"></div>","id":31},{"html":"<div class=\"img-contain\" style=\"background-image:url('images/app-process-2.png');\"></div>","id":32},{"html":"<h1>Sane routing</h1>\n<pre><code>BaseRouter.extend({\n    routes: {\n        &#39;post&#39;: &#39;read&#39;,\n        &#39;post/edit/:id&#39;: &#39;write&#39;\n    },\n    write: function(id) {\n        return userCanEditDeferred(id);\n    }\n});</code></pre>\n","id":33},{"html":"<h2>Proxy routing function</h2>\n<pre><code>//Router code ==========\nroutes: {\n    &#39;post&#39;: &#39;read&#39;,\n    &#39;post/edit/:id&#39;: &#39;write&#39;\n}\n//Application code =====\ninitialize: function() {\n    this.router = new MyRouter(this.routerProxy);\n},\nrouterProxy: function(action, firstParam) {\n    this.pageControllers[action].setActive(firstParam);\n}</code></pre>\n","id":34},{"html":"<h1>Component toolkit</h1>\n<ul>\n<li>ViewModel</li>\n<li>DataStore</li>\n<li>RouterMap</li>\n<li>PageController</li>\n</ul>\n","id":35},{"html":"<h1>Creating a ViewModel</h1>\n<pre><code>this.dataStore.getCurrentUser.then(this.onData);\n//Later...\nonData: function(userModel) {\n    this.view = new UserView({\n        viewModel: new UserViewModel(userModel.toJSON())\n    });\n}</code></pre>\n","id":36},{"html":"<h1>Using a ViewModel</h1>\n<pre><code>//UserViewModel ======\nexports: [&#39;fullName&#39;],\nfullName: function() { \n    if(this.attrs.lang === &#39;japanese&#39;)\n        return this.attr.lastName + &#39; &#39; + this.attr.firstName;\n    return this.attr.firstName + &#39; &#39; + this.attr.lastName;\n}\n\n//UserView ===========\nvar html = myTemplate(this.viewModel.toExports());</code></pre>\n","id":37},{"html":"<h1>Mobile Constraints</h1>\n<ul>\n<li>Less memory</li>\n<li>Less CPU power</li>\n<li>Less screen space</li>\n<li>Higher cost of requests</li>\n</ul>\n","id":38},{"html":"<h1>Concepts we learned</h1>\n","id":39},{"html":"<h2>If you want a unified code base, you have to be a control freak</h2>\n","id":40},{"html":"<h1>Control by making extension easy</h1>\n","id":41},{"html":"<h1>Simplifying Extension</h1>\n<ul>\n<li>Use mixins</li>\n<li>Use helpers</li>\n<li>Create and document hooks<ul>\n<li>Pre/postRoute</li>\n<li>Pre/postRender</li>\n</ul>\n</li>\n</ul>\n","id":42},{"html":"<p><div class=\"img-fill\" style=\"background-image:url('images/truck-crash.jpg');\"></div></p>\n<h2 class=\"reverse\">Big things are hard to control</h2>","id":43},{"html":"<h2>Small, unintrusive changes</h2>\n<ul>\n<li>Embrace constraints of classical engineering</li>\n<li>Avoid branching and merging</li>\n<li>Modify in place</li>\n<li>Train release mentality</li>\n</ul>\n","id":44},{"html":"<h1>Context is key</h1>\n","id":45},{"html":"<h1>Your frontend has a backend</h1>\n","id":46},{"html":"<h2>Code is a form of communication...</h2>\n<h2>So be concise and explicit</h2>\n","id":47},{"html":"<h1>Use a module pattern</h1>\n<ul>\n<li>Coupling and dependencies</li>\n<li>Testing</li>\n<li>Reason about and manipulate codebase</li>\n</ul>\n","id":48},{"html":"<h1>Backbone&#39;s friends</h1>\n<ul>\n<li>Fiber: extending components</li>\n<li>Q: promises library</li>\n<li>FastClick: touch events</li>\n<li>Venus: test runner</li>\n<li>AMD: module pattern</li>\n</ul>\n","id":49},{"html":"<h2>Backbone control freak checklist</h2>\n<ul>\n<li>Tools for common problems</li>\n<li>Expanded component toolbox</li>\n<li>Small is good, big is bad</li>\n<li>Make extension easy</li>\n<li>Use a module pattern</li>\n</ul>\n","id":50},{"html":"<h2>Special thanks to...</h2>\n<ul>\n<li>Ryan Blunden<ul>\n<li>linkedin.com/in/ryanblunden</li>\n<li>@ryan_blunden</li>\n</ul>\n</li>\n<li>Jakob Heuser<ul>\n<li>linkedin.com/in/jakobheuser</li>\n<li>@jakobo</li>\n</ul>\n</li>\n</ul>\n","id":51}];
+      
+
+    </script>
+    <script data-main="js/app.js" src="javascripts/program.js"></script>
+  	<script type="text/javascript">
+    /*
+      Inject.reset();
+      Inject.clearCache();
+      Inject.setExpires(-1);
+  	  Inject.setModuleRoot("javascripts/");
+      Inject.addRule(/^Base/, {
+        path: function (path) {
+          return '/lib/li-backbone/LI' + path + '.js';
+        }
+      });
+
+  	  require.run("program");
+      */
+  	</script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
