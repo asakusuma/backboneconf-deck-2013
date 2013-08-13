@@ -1,8 +1,10 @@
 About
 =====
-My deck from [BackboneConf 2013](http://www.backboneconf.com/ "BackboneConf"). The deck is a Backbone.js + Node.js app that highlights some of the concepts discussed in the deck. Video recording coming soon.
+My deck from [BackboneConf 2013](http://www.backboneconf.com/ "BackboneConf"). The deck is a Backbone.js + Node.js app that highlights some of the concepts discussed in the deck.
 
 If you just want to see the deck, you can view a static version of the deck here: http://asakusuma.github.io/backboneconf-deck-2013/
+
+You can also watch the video recording of the presentation here: http://www.youtube.com/watch?v=6cZA8UcRoh4
 
 Keep in mind that the static version of the deck does not have a server and doesn't showcase some of the concepts talked about in the deck.
 
